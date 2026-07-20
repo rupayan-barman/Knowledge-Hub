@@ -8,19 +8,9 @@ import type { Settings } from '@/types/database';
  * seeded, so the site never renders broken.
  */
 export async function getSettings(): Promise<Settings> {
-  try {
-    const supabase = createClient();
-    const { data, error } = await supabase.from('settings').select('*').single();
-
-    if (error || !data) {
-      return buildFallbackSettings();
-    }
-
-    return data as Settings;
-  } catch {
-    return buildFallbackSettings();
-  }
+  return buildFallbackSettings();
 }
+
 
 function buildFallbackSettings(): Settings {
   return {
